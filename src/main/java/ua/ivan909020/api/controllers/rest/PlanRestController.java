@@ -60,7 +60,7 @@ public class PlanRestController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void delete(@PathVariable Integer id) {
+	public void deleteById(@PathVariable Integer id) {
 		if (!planService.existsById(id)) {
 			throw new EntityNotFoundException("Plan with this id " + id + " not found");
 		}

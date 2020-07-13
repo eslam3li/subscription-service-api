@@ -60,7 +60,7 @@ public class UserRestController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void delete(@PathVariable Integer id) {
+	public void deleteById(@PathVariable Integer id) {
 		if (!userService.existsById(id)) {
 			throw new EntityNotFoundException("User with this id " + id + " not found");
 		}

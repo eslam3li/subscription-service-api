@@ -79,7 +79,7 @@ public class SubscriptionRestController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void delete(@PathVariable Integer id) {
+	public void deleteById(@PathVariable Integer id) {
 		if (!subscriptionService.existsById(id)) {
 			throw new EntityNotFoundException("Subscription with this id " + id + " not found");
 		}
