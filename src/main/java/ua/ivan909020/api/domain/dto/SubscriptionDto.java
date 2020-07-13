@@ -1,12 +1,10 @@
 package ua.ivan909020.api.domain.dto;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import ua.ivan909020.api.annotations.DateTime;
 
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import ua.ivan909020.api.validators.DateTime;
+import java.util.Objects;
 
 public class SubscriptionDto {
 

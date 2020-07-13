@@ -1,11 +1,12 @@
 package ua.ivan909020.api.validators;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import ua.ivan909020.api.annotations.ValueOfEnum;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, CharSequence> {
 
