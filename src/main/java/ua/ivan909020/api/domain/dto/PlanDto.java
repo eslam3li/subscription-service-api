@@ -1,16 +1,13 @@
 package ua.ivan909020.api.domain.dto;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.Length;
+import ua.ivan909020.api.annotations.ValueOfEnum;
+import ua.ivan909020.api.domain.DurationUnit;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import ua.ivan909020.api.domain.DurationUnit;
-import ua.ivan909020.api.validators.ValueOfEnum;
+import java.util.Objects;
 
 public class PlanDto {
 

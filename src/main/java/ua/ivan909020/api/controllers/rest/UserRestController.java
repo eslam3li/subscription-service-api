@@ -1,30 +1,20 @@
 package ua.ivan909020.api.controllers.rest;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+import ua.ivan909020.api.annotations.ApiPageable;
 import ua.ivan909020.api.domain.dao.User;
 import ua.ivan909020.api.domain.dto.UserDto;
 import ua.ivan909020.api.exceptions.EntityNotFoundException;
 import ua.ivan909020.api.mappers.UserMapper;
 import ua.ivan909020.api.services.UserService;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -70,7 +60,7 @@ public class UserRestController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void delete(@PathVariable Integer id) {
+	public void deleteById(@PathVariable Integer id) {
 		if (!userService.existsById(id)) {
 			throw new EntityNotFoundException("User with this id " + id + " not found");
 		}
@@ -79,8 +69,8 @@ public class UserRestController {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public List<UserDto> findAll(@RequestParam Integer page, @RequestParam Integer size) {
-		Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+	@ApiPageable
+	public List<UserDto> findAll(@ApiIgnore @PageableDefault(sort = "id") Pageable pageable) {
 		return userMapper.toDto(userService.findAll(pageable).getContent());
 	}
 

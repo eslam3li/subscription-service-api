@@ -32,22 +32,23 @@ public class ExceptionRestController extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(EntityNotFoundException.class)
-	public ErrorResponseDto handleEntityNotFound(EntityNotFoundException ex) {
+	public ResponseEntity<ErrorResponseDto> handleEntityNotFound(EntityNotFoundException ex) {
 		return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
 	}
 
 	@ExceptionHandler(ValidationException.class)
-	public ErrorResponseDto handleValidation(ValidationException ex) {
+	public ResponseEntity<ErrorResponseDto> handleValidation(ValidationException ex) {
 		return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
 	}
 
 	@ExceptionHandler(Exception.class)
-	public ErrorResponseDto handleAllExceptions(Exception ex) {
+	public ResponseEntity<ErrorResponseDto> handleAllExceptions(Exception ex) {
 		return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
 	}
 
-	private ErrorResponseDto buildResponse(HttpStatus status, String message) {
-		return new ErrorResponseDto(status.value(), status.getReasonPhrase(), message);
+	private ResponseEntity<ErrorResponseDto> buildResponse(HttpStatus status, String message) {
+		ErrorResponseDto responseDto = new ErrorResponseDto(status.value(), status.getReasonPhrase(), message);
+		return new ResponseEntity<>(responseDto, status);
 	}
 
 }
