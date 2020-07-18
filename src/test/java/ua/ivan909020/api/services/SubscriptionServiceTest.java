@@ -90,6 +90,8 @@ public class SubscriptionServiceTest {
         Subscription createdSubscription = subscriptionService.create(subscriptionToCreate);
 
         Subscription expectedSubscription = createStubSubscription(createdSubscription.getId());
+        expectedSubscription.setStartTime(createdSubscription.getStartTime());
+        expectedSubscription.setExpirationTime(createdSubscription.getExpirationTime());
 
         assertNotNull(createdSubscription.getId());
         assertEquals(expectedSubscription, createdSubscription);
