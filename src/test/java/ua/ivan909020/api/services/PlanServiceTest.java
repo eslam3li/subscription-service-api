@@ -80,7 +80,7 @@ public class PlanServiceTest {
         Plan planToCreate = createStubPlan(null);
 
         when(planService.create(planToCreate)).thenAnswer(invocation -> {
-            Plan plan = (Plan) invocation.getArguments()[0];
+            Plan plan = cloneStubPlan((Plan) invocation.getArguments()[0]);
             plan.setId(1);
             return plan;
         });
@@ -126,7 +126,7 @@ public class PlanServiceTest {
         Plan createdPlan = createStubPlan(1);
 
         when(planService.update(createdPlan)).thenAnswer(invocation -> {
-            Plan plan = (Plan) invocation.getArguments()[0];
+            Plan plan = cloneStubPlan((Plan) invocation.getArguments()[0]);
             plan.setName("Updated Plan");
             return plan;
         });
@@ -134,8 +134,8 @@ public class PlanServiceTest {
         createdPlan.setName("Updated Plan");
         Plan updatedPlan = planService.update(createdPlan);
 
-        Plan expectedPlan = createStubPlan(updatedPlan.getId());
-        expectedPlan.setName(updatedPlan.getName());
+        Plan expectedPlan = createStubPlan(createdPlan.getId());
+        expectedPlan.setName(createdPlan.getName());
 
         assertEquals(expectedPlan, updatedPlan);
     }
@@ -226,6 +226,16 @@ public class PlanServiceTest {
         plan.setPrice(1.0F);
         plan.setDurationUnit(DurationUnit.DAY);
         plan.setDurationCount(1);
+        return plan;
+    }
+
+    private Plan cloneStubPlan(Plan plan) {
+        Plan clonedPlan = new Plan();
+        clonedPlan.setId(plan.getId());
+        clonedPlan.setName(plan.getName());
+        clonedPlan.setPrice(plan.getPrice());
+        clonedPlan.setDurationUnit(plan.getDurationUnit());
+        clonedPlan.setDurationCount(plan.getDurationCount());
         return plan;
     }
 
