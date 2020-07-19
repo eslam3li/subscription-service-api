@@ -2,7 +2,7 @@
 Subscription service
 
 ## Technology stack
-Java 8, Maven, Spring Boot, Spring Data, Spring Security, Postgresql, Mapstruct
+Java 8, Maven, Spring Boot, Spring Data, Spring Security, Postgresql, Mapstruct, JUnit, Mockito
 
 ## Quick start guide
 1. Create postgres database and change the configuration in the properties `src/main/resources/application.properties`
